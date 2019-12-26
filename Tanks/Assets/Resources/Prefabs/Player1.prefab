@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 3031034062744059160, guid: 7c65f485ebd56fa438b87fc0a656a219,
         type: 3}
       propertyPath: m_Name
-      value: Tank Green
+      value: Player1
       objectReference: {fileID: 0}
     - target: {fileID: 3031034062744059161, guid: 7c65f485ebd56fa438b87fc0a656a219,
         type: 3}
@@ -67,6 +67,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3031034063086220745, guid: 7c65f485ebd56fa438b87fc0a656a219,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3031034063086220745, guid: 7c65f485ebd56fa438b87fc0a656a219,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.389
+      objectReference: {fileID: 0}
     - target: {fileID: 3031034063164677848, guid: 7c65f485ebd56fa438b87fc0a656a219,
         type: 3}
       propertyPath: m_Sprite
@@ -93,16 +103,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 0.9226716
-      objectReference: {fileID: 0}
-    - target: {fileID: 3031034063086220745, guid: 7c65f485ebd56fa438b87fc0a656a219,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3031034063086220745, guid: 7c65f485ebd56fa438b87fc0a656a219,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.389
       objectReference: {fileID: 0}
     - target: {fileID: 3031034063086220750, guid: 7c65f485ebd56fa438b87fc0a656a219,
         type: 3}

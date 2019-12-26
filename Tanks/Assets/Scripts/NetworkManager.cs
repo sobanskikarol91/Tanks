@@ -1,11 +1,18 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using System.IO;
+using System.Collections.Generic;
+using System;
 
-public class NetworkManager : MonoBehaviourPunCallbacks  
+public class NetworkManager : MonoBehaviourPunCallbacks
 {
+    public static int ConnectedPlayers { get; private set; } = 0;
+    private PhotonView view;
+
     private void Start()
     {
+        view = GetComponent<PhotonView>();
         Debug.Log("Start");
         PhotonNetwork.ConnectUsingSettings();
     }
@@ -35,5 +42,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         Debug.Log("Failed To Create room");
     }
 
+    public override void OnJoinedRoom()
+    {
+        Debug.Log("Start game");
+        GameObject player = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "NetworkPlayer"), Vector2.zero, Quaternion.identity);
+        view.RPC("UpdatePlayersInfo", RpcTarget.All);
+    }
 
+    [PunRPC]
+    void UpdatePlayersInfo()
+    {
+        ConnectedPlayers++;
+    }
 }
