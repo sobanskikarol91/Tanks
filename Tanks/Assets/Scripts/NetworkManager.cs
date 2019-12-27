@@ -2,12 +2,11 @@
 using Photon.Pun;
 using Photon.Realtime;
 using System.IO;
-using System.Collections.Generic;
-using System;
+
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
-    public static int ConnectedPlayers { get; private set; } = 0;
+    public static int ConnectedPlayers { get; set; } = 0;
     private PhotonView view;
 
     private void Start()
@@ -46,12 +45,5 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("Start game");
         GameObject player = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "NetworkPlayer"), Vector2.zero, Quaternion.identity);
-        view.RPC("UpdatePlayersInfo", RpcTarget.All);
-    }
-
-    [PunRPC]
-    void UpdatePlayersInfo()
-    {
-        ConnectedPlayers++;
     }
 }
