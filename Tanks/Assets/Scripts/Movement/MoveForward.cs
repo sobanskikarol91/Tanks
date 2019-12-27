@@ -11,6 +11,6 @@ public class MoveForward : MonoBehaviour
 
     private void Update()
     {
-        transform.position +=  -transform.up * speed * Time.deltaTime;
+        transform.position += -transform.up * speed * Time.deltaTime;
     }
 }

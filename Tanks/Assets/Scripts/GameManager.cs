@@ -4,7 +4,7 @@
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public SpawnManager spawnManager;
+    [HideInInspector] public SpawnManager spawnManager;
 
     private void Awake()
     {
