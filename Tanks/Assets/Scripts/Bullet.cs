@@ -3,12 +3,12 @@
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] float speed = 10;
+     float speed = 10;
 
-    public void InitializeBullet(float lag)
+    public void InitializeBullet(Vector3 direction, float lag)
     {
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
-        rigidbody.velocity = -transform.up * speed *  100 * Time.deltaTime;
+        rigidbody.velocity = direction * speed;
         rigidbody.position += rigidbody.velocity * lag;
     }
 }

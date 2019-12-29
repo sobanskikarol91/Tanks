@@ -20,7 +20,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.JoinRandomRoom();
         PhotonNetwork.AutomaticallySyncScene = true;
-        Debug.Log("Connected do server");
+        Debug.Log("Connected do server" + PhotonNetwork.CloudRegion);
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)

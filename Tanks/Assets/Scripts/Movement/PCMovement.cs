@@ -1,22 +1,31 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 
-public class PCMovement : Ability
+public class PCMovement : MonoBehaviour
 {
     [SerializeField] float speed = 1f;
 
-    private Rigidbody2D rb;
+    private Rigidbody2D rigidbody;
+    private PhotonView view;
+    private Vector2 networkPosition;
+
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        view = GetComponent<PhotonView>();
+        rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    public void Execute()
+    private void FixedUpdate()
+    {
+        if (view.IsMine)
+            Move();
+    }
+
+    private void Move()
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-
-        rb.position += new Vector2(horizontal, vertical).normalized * speed * Time.deltaTime;
-        
+        rigidbody.velocity = new Vector2(horizontal, vertical).normalized * speed * Time.fixedDeltaTime;
     }
 }

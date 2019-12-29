@@ -19,25 +19,23 @@ public class Shooting : MonoBehaviour
     {
         if (view.IsMine && Input.GetMouseButtonDown(0))
         {
-            view.RPC("Fire", RpcTarget.AllViaServer);
+            view.RPC("Fire", RpcTarget.AllViaServer, spawnPoint.position, spawnPoint.rotation);
         }
     }
 
-    public void Fire(Vector3 position, Quaternion rotation, PhotonMessageInfo info)
-    {
-        //float lag = (float)(PhotonNetwork.Time - info.SentServerTime);
-        //GameObject bullet;
-
-        ///** Use this if you want to fire one bullet at a time **/
-        //bullet = Instantiate(BulletPrefab, rigidbody.position, Quaternion.identity) as GameObject;
-        //bullet.GetComponent<Bullet>().InitializeBullet(photonView.Owner, (rotation * Vector3.forward), Mathf.Abs(lag));
-    }
-
     [PunRPC]
-    private void Fire(PhotonMessageInfo info)
+    private void Fire(Vector3 position, Quaternion rotation, PhotonMessageInfo info)
     {
-        GameObject bullet =  Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
+        GameObject bullet = Instantiate(bulletPrefab, position, rotation);
         float lag = Mathf.Abs((float)(PhotonNetwork.Time - info.SentServerTime));
-        bullet.GetComponent<Bullet>().InitializeBullet(lag);
+        bullet.GetComponent<Bullet>().InitializeBullet(-transform.up, lag);
     }
+
+    //Photonview.RPC("_SpawnCollider", PhotonTargets.Others, Rb.position, Rb.rotation);
+    //[PunRPC]
+    //private void _SpawnCollider(Vector3 position, Quaternion rotation)
+    //{
+    //    GameObject collider;
+    //    collider = Instantiate(Enemy, position + Rb.transform.forward * distance, rotation);
+    //}
 }
