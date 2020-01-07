@@ -1,25 +1,19 @@
 ﻿using UnityEngine;
 using Photon.Pun;
+using System.IO;
 
-
-public class Shooting : MonoBehaviour
+public class Shooting : MonoBehaviourPun
 {
     [SerializeField] Transform spawnPoint;
     [SerializeField] GameObject bulletPrefab;
 
-    private PhotonView view;
-
-
-    private void Awake()
-    {
-        view = GetComponent<PhotonView>();
-    }
 
     private void Update()
     {
-        if (view.IsMine && Input.GetMouseButtonDown(0))
+        if (photonView.IsMine && Input.GetMouseButtonDown(0))
         {
-            view.RPC("Fire", RpcTarget.AllViaServer, spawnPoint.position, spawnPoint.rotation);
+           // GameObject bullet = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Rocket"), spawnPoint.position, spawnPoint.rotation);
+            photonView.RPC("Fire", RpcTarget.AllViaServer, spawnPoint.position, spawnPoint.rotation);
         }
     }
 
@@ -28,14 +22,6 @@ public class Shooting : MonoBehaviour
     {
         GameObject bullet = Instantiate(bulletPrefab, position, rotation);
         float lag = Mathf.Abs((float)(PhotonNetwork.Time - info.SentServerTime));
-        bullet.GetComponent<Bullet>().InitializeBullet(-transform.up, lag);
+        bullet.GetComponent<Bullet>().InitializeBullet(-transform.up, 0);
     }
-
-    //Photonview.RPC("_SpawnCollider", PhotonTargets.Others, Rb.position, Rb.rotation);
-    //[PunRPC]
-    //private void _SpawnCollider(Vector3 position, Quaternion rotation)
-    //{
-    //    GameObject collider;
-    //    collider = Instantiate(Enemy, position + Rb.transform.forward * distance, rotation);
-    //}
 }

@@ -35,5 +35,6 @@ MonoBehaviour:
   - Fire
   - RespawnSpaceship
   - UpdatePlayersInfo
+  - DoDamage
   DisableAutoOpenWizard: 1
   ShowSettings: 0
