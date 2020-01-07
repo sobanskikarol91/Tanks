@@ -36,5 +36,6 @@ MonoBehaviour:
   - RespawnSpaceship
   - UpdatePlayersInfo
   - DoDamage
+  - OnHealthChange
   DisableAutoOpenWizard: 1
   ShowSettings: 0

@@ -1,13 +1,12 @@
-﻿using Photon.Pun;
-using UnityEngine;
+﻿using UnityEngine;
+using Photon.Pun;
 
 
-public class Health : MonoBehaviour
+public class Health : MonoBehaviourPun
 {
     [SerializeField] float maxHealth;
 
     private float currentHealth;
-    private PhotonView view;
     public delegate void HealthChangeEventHandler(float current, float max);
     public event HealthChangeEventHandler HealthChange;
 
@@ -19,15 +18,22 @@ public class Health : MonoBehaviour
 
     public void DoDamage(float damage)
     {
-        if (view?.IsMine == false) return;
+        if (photonView.IsMine == false) return;
 
         currentHealth -= damage;
-        HealthChange?.Invoke(currentHealth, maxHealth);
+        base.photonView.RPC("OnHealthChange", RpcTarget.AllViaServer, currentHealth, maxHealth);
+
 
         Debug.Log($"Damaged: {currentHealth}");
 
         if (currentHealth <= 0)
             Die();
+    }
+
+    [PunRPC]
+    private void OnHealthChange(float currentHealth, float maxHealth)
+    {
+        HealthChange?.Invoke(currentHealth, maxHealth);
     }
 
     private void Die()

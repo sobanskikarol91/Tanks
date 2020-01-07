@@ -16,7 +16,7 @@ public class HealthBar : MonoBehaviour
 
     public void UpdateBar(float current, float max)
     {
-        Debug.Log("Update baq");
+        Debug.Log("Update bar");
         healthImage.localScale = new Vector2(current / max, healthImage.localScale.y);
     }
 }
