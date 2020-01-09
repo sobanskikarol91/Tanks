@@ -6,7 +6,8 @@ public class Health : MonoBehaviourPun, IPunObservable
 {
     [SerializeField] float maxHealth;
     [SerializeField] float currentHealth;
-    [SerializeField] AudioClip deathSnd; 
+    [SerializeField] AudioClip deathSnd;
+    [SerializeField] AudioClip damageSnd;
 
     public delegate void HealthChangeEventHandler(float current, float max);
     public event HealthChangeEventHandler HealthChange;
@@ -24,9 +25,7 @@ public class Health : MonoBehaviourPun, IPunObservable
     {
         currentHealth -= damage;
         photonView.RPC("OnHealthChange", RpcTarget.AllViaServer, currentHealth, maxHealth, damage);
-        Debug.Log("Hit");
-        Debug.Log($"CurrentHealth: {currentHealth} Damage: {damage}");
-
+        AudioSource.PlayClipAtPoint(damageSnd, transform.position);
         currentHealth--;
 
         if (currentHealth <= 0)
