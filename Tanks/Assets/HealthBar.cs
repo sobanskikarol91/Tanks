@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
@@ -7,6 +7,9 @@ public class HealthBar : MonoBehaviour
     public Health health;
 
     private Vector2 originScale;
+
+    [SerializeField] Color32 red;
+    [SerializeField] Color32 green;
 
     private void Awake()
     {
@@ -17,6 +20,8 @@ public class HealthBar : MonoBehaviour
     public void UpdateBar(float current, float max)
     {
         Debug.Log("Update bar");
-        healthImage.localScale = new Vector2(current / max, healthImage.localScale.y);
+        float percantage = current / max;
+        healthImage.localScale = new Vector2(percantage, healthImage.localScale.y);
+        healthImage.GetComponent<Image>().color = Color.Lerp(red, green, percantage);
     }
 }
