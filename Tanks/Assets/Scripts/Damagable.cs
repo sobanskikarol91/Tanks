@@ -6,13 +6,9 @@ public class Damagable : MonoBehaviourPun
 {
     [SerializeField] float damage = 20;
 
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (photonView)
-            DoDamage(collision);
-        else
-            Debug.Log("there is no view component attached");
+        DoDamage(collision);
     }
 
     private void DoDamage(Collision2D collision)
@@ -22,6 +18,12 @@ public class Damagable : MonoBehaviourPun
         if (health)
             health.DoDamage(damage);
 
-        PhotonNetwork.Destroy(photonView);
+        photonView.RPC("Destroy", RpcTarget.All);
+    }
+
+    [PunRPC]
+    void Destroy()
+    {
+        Destroy(gameObject);
     }
 }

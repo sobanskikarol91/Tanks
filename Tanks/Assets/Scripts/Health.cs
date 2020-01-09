@@ -2,11 +2,11 @@
 using Photon.Pun;
 
 
-public class Health : MonoBehaviourPun
+public class Health : MonoBehaviourPun, IPunObservable
 {
     [SerializeField] float maxHealth;
+    [SerializeField] float currentHealth;
 
-    private float currentHealth;
     public delegate void HealthChangeEventHandler(float current, float max);
     public event HealthChangeEventHandler HealthChange;
 
@@ -18,11 +18,12 @@ public class Health : MonoBehaviourPun
 
     public void DoDamage(float damage)
     {
-       // if (photonView.IsMine == false) return;
-
         currentHealth -= damage;
-        base.photonView.RPC("OnHealthChange", RpcTarget.AllViaServer, currentHealth, maxHealth, damage);
+        photonView.RPC("OnHealthChange", RpcTarget.AllViaServer, currentHealth, maxHealth, damage);
+        Debug.Log("Hit");
         Debug.Log($"CurrentHealth: {currentHealth} Damage: {damage}");
+
+        currentHealth--;
 
         if (currentHealth <= 0)
             Die();
@@ -31,7 +32,6 @@ public class Health : MonoBehaviourPun
     [PunRPC]
     private void OnHealthChange(float currentHealth, float maxHealth, float damage)
     {
-
         HealthChange?.Invoke(currentHealth, maxHealth);
     }
 
@@ -43,7 +43,19 @@ public class Health : MonoBehaviourPun
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-            DoDamage(10);
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //    DoDamage(10);
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(currentHealth);
+        }
+        else
+        {
+            currentHealth = (float)stream.ReceiveNext();
+        }
     }
 }

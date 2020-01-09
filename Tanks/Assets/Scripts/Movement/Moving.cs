@@ -1,7 +1,7 @@
 ﻿using Photon.Pun;
 using UnityEngine;
 
-public class PCMovement : MonoBehaviour
+public class Moving : MonoBehaviour
 {
     [SerializeField] float speed = 1f;
 

@@ -28,6 +28,5 @@ public class NetworkPlayer : MonoBehaviour
     void UpdatePlayersInfo()
     {
         NetworkManager.ConnectedPlayers++;
-        Debug.Log(NetworkManager.ConnectedPlayers);
     }
 }
