@@ -4,11 +4,15 @@
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    [HideInInspector] public SpawnManager spawnManager;
+
+    [HideInInspector] public ScoreManager score;
+    [HideInInspector] public SpawnManager spawn;
+
 
     private void Awake()
     {
         instance = this;
-        spawnManager = GetComponent<SpawnManager>();
+        spawn = GetComponent<SpawnManager>();
+        score = GetComponent<ScoreManager>();
     }
 }

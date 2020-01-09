@@ -18,7 +18,7 @@ public class NetworkPlayer : MonoBehaviour
     private void CreateAvatar()
     {
         int nr = NetworkManager.ConnectedPlayers;
-        Transform spawnPoint = GameManager.instance.spawnManager.SpawnPoints[nr].transform;
+        Transform spawnPoint = GameManager.instance.spawn.SpawnPoints[nr].transform;
 
         avatar = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Player" + nr), spawnPoint.position, spawnPoint.rotation);
         view.RPC("UpdatePlayersInfo", RpcTarget.AllBuffered);

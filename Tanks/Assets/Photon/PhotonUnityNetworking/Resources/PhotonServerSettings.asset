@@ -38,5 +38,7 @@ MonoBehaviour:
   - DoDamage
   - OnHealthChange
   - Destroy
+  - OnDie
+  - UpdateScore
   DisableAutoOpenWizard: 1
   ShowSettings: 0

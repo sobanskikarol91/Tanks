@@ -6,9 +6,13 @@ public class Health : MonoBehaviourPun, IPunObservable
 {
     [SerializeField] float maxHealth;
     [SerializeField] float currentHealth;
+    [SerializeField] AudioClip deathSnd; 
 
     public delegate void HealthChangeEventHandler(float current, float max);
     public event HealthChangeEventHandler HealthChange;
+
+    public delegate void DeathEventHandler();
+    public event DeathEventHandler Death;
 
 
     private void Awake()
@@ -26,7 +30,7 @@ public class Health : MonoBehaviourPun, IPunObservable
         currentHealth--;
 
         if (currentHealth <= 0)
-            Die();
+            photonView.RPC("OnDie", RpcTarget.AllViaServer);
     }
 
     [PunRPC]
@@ -35,16 +39,13 @@ public class Health : MonoBehaviourPun, IPunObservable
         HealthChange?.Invoke(currentHealth, maxHealth);
     }
 
-    private void Die()
+    [PunRPC]
+    private void OnDie()
     {
+        AudioSource.PlayClipAtPoint(deathSnd, transform.position);
+        Death?.Invoke();
         currentHealth = 0;
         Destroy(gameObject);
-    }
-
-    private void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.Q))
-        //    DoDamage(10);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

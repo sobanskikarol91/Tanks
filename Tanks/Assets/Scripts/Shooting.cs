@@ -6,6 +6,8 @@ public class Shooting : MonoBehaviourPun
 {
     [SerializeField] Transform spawnPoint;
     [SerializeField] GameObject bulletPrefab;
+    [SerializeField] AudioClip shotSnd;
+
 
     private void Update()
     {
@@ -13,6 +15,7 @@ public class Shooting : MonoBehaviourPun
         {
             GameObject bullet = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Rocket"), spawnPoint.position, spawnPoint.rotation);
             bullet.GetComponent<Bullet>().InitializeBullet(-transform.up, 0);
+            AudioSource.PlayClipAtPoint(shotSnd, transform.position);
         }
     }
 }
