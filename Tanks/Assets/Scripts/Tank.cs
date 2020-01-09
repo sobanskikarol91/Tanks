@@ -1,10 +1,7 @@
 ﻿using Photon.Pun;
-using UnityEngine;
-using System.Collections;
-using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 
-public class Player : MonoBehaviourPun
+public class Tank : MonoBehaviourPun
 {
     private Health health;
 
@@ -16,7 +13,7 @@ public class Player : MonoBehaviourPun
 
     private void UpdateScore()
     {
-        PhotonNetwork.LocalPlayer.AddScore(1);
+        PhotonNetwork.LocalPlayer.AddScore(-1);
         GameManager.instance.score.UpdateScore();
     }
 }

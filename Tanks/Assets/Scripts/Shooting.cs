@@ -14,7 +14,7 @@ public class Shooting : MonoBehaviourPun
         if (photonView.IsMine && Input.GetMouseButtonDown(0))
         {
             GameObject bullet = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Rocket"), spawnPoint.position, spawnPoint.rotation);
-            bullet.GetComponent<Bullet>().InitializeBullet(-transform.up, 0);
+            bullet.GetComponent<Bullet>().InitializeBullet(photonView.Owner, -transform.up, 0);
             AudioSource.PlayClipAtPoint(shotSnd, transform.position);
         }
     }
