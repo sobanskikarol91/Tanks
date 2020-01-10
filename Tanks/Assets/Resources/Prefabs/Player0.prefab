@@ -227,7 +227,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7316839149608003377}
-  - {fileID: 1135051982}
+  - {fileID: 2880088616325760304}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 500
-  rotationSpeed: 10
+  rotationSpeed: 5
   engineIdleSnd: {fileID: 8300000, guid: b41f65150dbb1d64b9a18cd93020c17e, type: 3}
   drivingSnd: {fileID: 8300000, guid: 0f3043bce6a675f49ad8025ee346eacf, type: 3}
 --- !u!114 &-4976540149888366001
@@ -361,7 +361,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.04
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -897,7 +897,7 @@ PrefabInstance:
         type: 3}
       propertyPath: healthImage
       value: 
-      objectReference: {fileID: 1487961788}
+      objectReference: {fileID: 2880088616325760307}
     - target: {fileID: 853263183510912345, guid: 4d2d2a562b6b25e459f61a7dfb25da3e,
         type: 3}
       propertyPath: health
@@ -925,13 +925,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d2d2a562b6b25e459f61a7dfb25da3e, type: 3}
---- !u!224 &1135051982 stripped
+--- !u!224 &2880088616325760304 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2880088615258014600, guid: 4d2d2a562b6b25e459f61a7dfb25da3e,
     type: 3}
   m_PrefabInstance: {fileID: 2880088616325760838}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &1487961788 stripped
+--- !u!224 &2880088616325760307 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2880088615106263546, guid: 4d2d2a562b6b25e459f61a7dfb25da3e,
     type: 3}
