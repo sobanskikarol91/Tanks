@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
         spawn = GetComponent<SpawnManager>();
         score = GetComponent<ScoreManager>();
     }

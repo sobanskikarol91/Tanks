@@ -7,11 +7,9 @@ using System.IO;
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
     public static int ConnectedPlayers { get; set; } = 0;
-    private PhotonView view;
 
     private void Start()
     {
-        view = GetComponent<PhotonView>();
         Debug.Log("Start");
         PhotonNetwork.ConnectUsingSettings();
     }
