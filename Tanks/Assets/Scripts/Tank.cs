@@ -1,27 +1,37 @@
-﻿using Photon.Pun;
+﻿using System;
+using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 using UnityEngine;
 
 public class Tank : MonoBehaviourPun
 {
-    private Health health;
+    public Health Health { get; private set; }
+    [SerializeField] GameObject body;
+
 
     private void Awake()
     {
-        health = GetComponent<Health>();
-        health.Death += HandleDeath;
-    }
-
-    private void HandleDeath()
-    {
-        PhotonNetwork.LocalPlayer.AddScore(-1);
-        GameManager.instance.score.UpdateScore();
-        GameManager.instance.spawn.Respawn();
+        Health = GetComponent<Health>();
+        Health.Death += HandleDeath;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
-            health.DoDamage(10);
+            Health.DoDamage(10);
+    }
+
+    private void HandleDeath()
+    {
+        PhotonNetwork.LocalPlayer.AddScore(-1);
+        GameManager.instance.ScoreManager.UpdateScore();
+        GameManager.instance.GoToNextRound();
+        body.SetActive(false);
+
+    }
+
+    public void Restart()
+    {
+        
     }
 }

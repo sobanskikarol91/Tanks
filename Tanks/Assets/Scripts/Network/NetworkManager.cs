@@ -2,11 +2,13 @@
 using Photon.Pun;
 using Photon.Realtime;
 using System.IO;
-
+using System;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
     public static int ConnectedPlayers { get; set; } = 0;
+
+    public NetworkPlayer Player { get; private set; }
 
     private void Start()
     {
@@ -42,6 +44,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("Start game");
-        GameObject player = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "NetworkPlayer"), Vector2.zero, Quaternion.identity);
+        Player = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "NetworkPlayer"), Vector2.zero, Quaternion.identity).GetComponent<NetworkPlayer>();
     }
 }

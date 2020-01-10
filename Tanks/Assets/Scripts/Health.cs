@@ -2,7 +2,7 @@
 using Photon.Pun;
 
 
-public class Health : MonoBehaviourPun, IPunObservable
+public class Health : MonoBehaviourPun, IPunObservable, IRestart
 {
     [SerializeField] float maxHealth;
     [SerializeField] float currentHealth;
@@ -42,9 +42,8 @@ public class Health : MonoBehaviourPun, IPunObservable
     private void OnDie()
     {
         AudioSource.PlayClipAtPoint(deathSnd, transform.position);
-        Death?.Invoke();
         currentHealth = 0;
-        Destroy(gameObject);
+        Death?.Invoke();
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -57,5 +56,11 @@ public class Health : MonoBehaviourPun, IPunObservable
         {
             currentHealth = (float)stream.ReceiveNext();
         }
+    }
+
+    public void Restart()
+    {
+        currentHealth = maxHealth;
+        photonView.RPC("OnHealthChange", RpcTarget.AllViaServer, currentHealth, maxHealth, 0);
     }
 }
