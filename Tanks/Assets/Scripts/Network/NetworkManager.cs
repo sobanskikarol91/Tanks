@@ -3,11 +3,14 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.IO;
 using System;
+using UnityEngine.UI;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
     public static int ConnectedPlayers { get; set; } = 0;
 
+
+    [SerializeField] Text serverInfo;
     public NetworkPlayer Player { get; private set; }
 
     private void Start()
@@ -20,7 +23,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.JoinRandomRoom();
         PhotonNetwork.AutomaticallySyncScene = true;
-        Debug.Log("Connected do server" + PhotonNetwork.CloudRegion);
+        Debug.Log("Connected do server: " + PhotonNetwork.CloudRegion);
+        serverInfo.text = "Server: " + PhotonNetwork.CloudRegion; 
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
