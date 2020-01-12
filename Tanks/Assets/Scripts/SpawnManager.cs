@@ -41,6 +41,6 @@ public class SpawnManager : MonoBehaviour
 
     void RespawnPlayer()
     {
-        GameManager.instance.NetworkManager.Player.avatar.Restart();
+        //GameManager.instance.NetworkManager.Player.avatar.Restart();
     }
 }

@@ -28,7 +28,7 @@ public class NetworkPlayer : MonoBehaviour
     public void RestartAvatar()
     {
         avatar.gameObject.SetActive(true);
-        avatar.
+        //avatar.
     }
 
     [PunRPC]

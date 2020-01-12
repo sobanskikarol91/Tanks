@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: 219099316}
   - component: {fileID: 219099315}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Counter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1005,7 +1005,7 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 346598635}
   - {fileID: 1206384478}
-  respawnTime: 3
+  respawnTime: 2
   timeTxt: {fileID: 219099315}
   respawnPanel: {fileID: 449246853}
 --- !u!114 &1898810974
