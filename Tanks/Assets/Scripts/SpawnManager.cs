@@ -8,7 +8,7 @@ public class SpawnManager : MonoBehaviour
 {
     public Transform[] SpawnPoints => spawnPoints;
     [SerializeField] Transform[] spawnPoints;
-    [SerializeField] float respawnTime = 2f;
+    [SerializeField] float respawnTime = 3f;
     [SerializeField] Text timeTxt;
     [SerializeField] GameObject respawnPanel;
 
@@ -29,10 +29,11 @@ public class SpawnManager : MonoBehaviour
 
         respawnPanel.SetActive(true);
 
-        while (leftTime > 0)
+        while (leftTime >= 0)
         {
-            yield return new WaitForSeconds(1);
-            timeTxt.text = (--leftTime).ToString();
+            timeTxt.text = leftTime.ToString();
+            --leftTime;
+            yield return new WaitForSeconds(0.5f);
         }
 
         respawnPanel.SetActive(false);

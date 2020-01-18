@@ -1030,7 +1030,7 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 346598635}
   - {fileID: 1206384478}
-  respawnTime: 2
+  respawnTime: 3
   timeTxt: {fileID: 219099315}
   respawnPanel: {fileID: 449246853}
 --- !u!114 &1898810974
