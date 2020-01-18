@@ -8,8 +8,7 @@ public class Damagable : MonoBehaviourPun
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (photonView.IsMine)
-            CollisionDetected(collision);
+        CollisionDetected(collision);
     }
 
     private void CollisionDetected(Collision2D collision)
@@ -24,13 +23,5 @@ public class Damagable : MonoBehaviourPun
 
         if (health)
             health.DoDamage(damage);
-
-        photonView.RPC("Destroy", RpcTarget.All);
-    }
-
-    [PunRPC]
-    void Destroy()
-    {
-        Destroy(gameObject);
     }
 }

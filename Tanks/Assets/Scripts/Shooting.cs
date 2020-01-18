@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using Photon.Pun;
-using System.IO;
+
 
 public class Shooting : MonoBehaviourPun
 {
@@ -13,9 +13,15 @@ public class Shooting : MonoBehaviourPun
     {
         if (photonView.IsMine && Input.GetMouseButtonDown(0))
         {
-            GameObject bullet = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Rocket"), spawnPoint.position, spawnPoint.rotation);
-            bullet.GetComponent<Bullet>().InitializeBullet(photonView.Owner, -transform.up, 0);
-            AudioSource.PlayClipAtPoint(shotSnd, transform.position);
+            photonView.RPC("Fire", RpcTarget.All);
         }
+    }
+
+    [PunRPC]
+    private void Fire()
+    {
+        GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
+        bullet.GetComponent<Bullet>().InitializeBullet(photonView.Owner, -transform.up, 0);
+        AudioSource.PlayClipAtPoint(shotSnd, transform.position);
     }
 }

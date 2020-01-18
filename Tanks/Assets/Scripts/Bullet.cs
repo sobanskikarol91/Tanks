@@ -1,24 +1,18 @@
 ﻿using UnityEngine;
 using Photon.Realtime;
-using Photon.Pun;
 
-public class Bullet : MonoBehaviourPun
+
+public class Bullet : MonoBehaviour
 {
     public Player Owner { get; private set; }
     [SerializeField] float speed = 10;
     private new Rigidbody2D rigidbody;
 
+
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-    }
-
-    public void Start()
-    {
-        if (photonView.IsMine)
-            Invoke("DestroyAfterTime", 3f);
-        else
-            Debug.Log("Its not my bullet");
+        Invoke("Destroy", 3f);
     }
 
     private void Update()
@@ -32,10 +26,10 @@ public class Bullet : MonoBehaviourPun
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
-    public void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (photonView.IsMine)
-            PhotonNetwork.Destroy(gameObject);
+        if (collision.gameObject.tag.Equals("Player"))
+            Destroy();
     }
 
     public void InitializeBullet(Player owner, Vector3 direction, float lag)
@@ -45,8 +39,8 @@ public class Bullet : MonoBehaviourPun
         rigidbody.position += rigidbody.velocity * lag;
     }
 
-    void DestroyAfterTime()
+    void Destroy()
     {
-        PhotonNetwork.Destroy(gameObject);
+        Destroy(gameObject);
     }
 }
