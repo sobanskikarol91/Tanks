@@ -14,7 +14,7 @@ public class Health : MonoBehaviourPun, IPunObservable, IRestart
 
     public delegate void DeathEventHandler();
     public event DeathEventHandler Death;
-    private bool IsDeath => currentHealth <=0;
+    private bool IsDeath => currentHealth <= 0;
 
     private void Awake()
     {

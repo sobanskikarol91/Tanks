@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPun
 {
     public static GameManager instance;
 
@@ -19,8 +20,15 @@ public class GameManager : MonoBehaviour
         NetworkManager = GetComponent<NetworkManager>();
     }
 
-    public void GoToNextRound()
+    public void Restart()
     {
+       photonView.RPC("GoToNextRound", RpcTarget.AllViaServer);
+    }
+
+    [PunRPC]
+    void GoToNextRound()
+    {
+        ScoreManager.UpdateScore();
         SpawnManager.Respawn();
     }
 }

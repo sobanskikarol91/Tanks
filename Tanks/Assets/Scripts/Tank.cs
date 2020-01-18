@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 using UnityEngine;
@@ -11,7 +12,9 @@ public class Tank : MonoBehaviourPun
     private void Awake()
     {
         Health = GetComponent<Health>();
-        Health.Death += HandleDeath;
+
+        if (photonView.IsMine)
+            Health.Death += HandleDeath;
     }
 
     private void Update()
@@ -22,8 +25,9 @@ public class Tank : MonoBehaviourPun
 
     private void HandleDeath()
     {
-        PhotonNetwork.LocalPlayer.AddScore(-1);
-        GameManager.instance.ScoreManager.UpdateScore();
-        GameManager.instance.GoToNextRound();
+        if (photonView.IsMine)
+            PhotonNetwork.LocalPlayer.AddScore(-1);
+
+        GameManager.instance.Restart();
     }
 }
