@@ -49,7 +49,7 @@ public class Health : MonoBehaviourPun, IPunObservable, IRestart
         currentHealth = 0;
         Death?.Invoke();
 
-        if (PhotonNetwork.IsMasterClient)
+        if (photonView.IsMine)
             PhotonNetwork.Destroy(gameObject);
     }
 

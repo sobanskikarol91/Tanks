@@ -1,5 +1,4 @@
-﻿using Photon.Pun;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 public class GameManager : MonoBehaviour
@@ -9,6 +8,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public ScoreManager ScoreManager;
     [HideInInspector] public SpawnManager SpawnManager;
     [HideInInspector] public NetworkManager NetworkManager;
+
 
     private void Awake()
     {
