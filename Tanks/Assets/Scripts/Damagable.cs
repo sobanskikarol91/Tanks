@@ -9,6 +9,12 @@ public class Damagable : MonoBehaviourPun
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (photonView.IsMine)
+            CollisionDetected(collision);
+    }
+
+    private void CollisionDetected(Collision2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Player"))
             DoDamage(collision);
     }
 
