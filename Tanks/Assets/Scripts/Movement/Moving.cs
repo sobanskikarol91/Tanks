@@ -1,7 +1,7 @@
 ﻿using Photon.Pun;
 using UnityEngine;
 
-public class Moving : MonoBehaviour
+public class Moving : MonoBehaviourPun
 {
     [SerializeField] float speed = 1f;
     [SerializeField] float rotationSpeed = 10f;
@@ -18,6 +18,9 @@ public class Moving : MonoBehaviour
         view = GetComponent<PhotonView>();
         rigidbody = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
+
+        if (photonView.IsMine)
+            audioSource.Play();
     }
 
     private void FixedUpdate()
