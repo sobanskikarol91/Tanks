@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviourPun
     public void OnCollisionEnter(Collision collision)
     {
         if (photonView.IsMine)
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
     }
 
     public void InitializeBullet(Player owner, Vector3 direction, float lag)

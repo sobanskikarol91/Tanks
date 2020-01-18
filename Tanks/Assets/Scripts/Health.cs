@@ -25,15 +25,14 @@ public class Health : MonoBehaviourPun, IPunObservable, IRestart
     {
         if (IsDeath) return;
 
+        Debug.Log($"Damage: {damage}");
         currentHealth -= damage;
         photonView.RPC("OnHealthChange", RpcTarget.AllViaServer, currentHealth, maxHealth, damage);
         AudioSource.PlayClipAtPoint(damageSnd, transform.position);
         currentHealth--;
 
-        OnDie();
-
         if (currentHealth <= 0)
-            photonView.RPC("OnDie", RpcTarget.Others);
+            photonView.RPC("OnDie", RpcTarget.All);
     }
 
     [PunRPC]

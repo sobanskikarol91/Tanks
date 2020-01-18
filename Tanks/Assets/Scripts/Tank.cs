@@ -20,7 +20,7 @@ public class Tank : MonoBehaviourPun
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
-            Health.DoDamage(100);
+            Health.DoDamage(10);
     }
 
     private void HandleDeath()
