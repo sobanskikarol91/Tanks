@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviourPun
 
     public void Restart()
     {
-       photonView.RPC("GoToNextRound", RpcTarget.AllViaServer);
+        photonView.RPC("GoToNextRound", RpcTarget.AllViaServer);
     }
 
     [PunRPC]

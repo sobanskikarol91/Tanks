@@ -8,7 +8,8 @@ public class Damagable : MonoBehaviourPun
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        DoDamage(collision);
+        if (photonView.IsMine)
+            DoDamage(collision);
     }
 
     private void DoDamage(Collision2D collision)
