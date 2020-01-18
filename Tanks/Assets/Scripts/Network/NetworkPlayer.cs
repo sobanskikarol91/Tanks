@@ -1,39 +1,45 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 using System.IO;
+using System;
 
-public class NetworkPlayer : MonoBehaviour
+public class NetworkPlayer : MonoBehaviourPun, IRestart
 {
     private Tank avatar;
-    private PhotonView view;
+    private int nr;
 
 
     private void Start()
     {
-        view = GetComponent<PhotonView>();
+        if (photonView.IsMine)
+            AddPlayerToGame();
+    }
 
-        if (view.IsMine)
-            CreateAvatar();
+    private void AddPlayerToGame()
+    {
+        int nr = NetworkManager.ConnectedPlayers;
+        CreateAvatar();
+
+        photonView.RPC("UpdatePlayersInfo", RpcTarget.AllBufferedViaServer);
     }
 
     private void CreateAvatar()
     {
-        int nr = NetworkManager.ConnectedPlayers;
         Transform spawnPoint = GameManager.instance.SpawnManager.SpawnPoints[nr].transform;
-
         avatar = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Player" + nr), spawnPoint.position, spawnPoint.rotation).GetComponent<Tank>();
-        view.RPC("UpdatePlayersInfo", RpcTarget.AllBuffered);
-    }
-
-    public void RestartAvatar()
-    {
-        avatar.gameObject.SetActive(true);
-        //avatar.
     }
 
     [PunRPC]
     void UpdatePlayersInfo()
     {
         NetworkManager.ConnectedPlayers++;
+    }
+
+    public void Restart()
+    {
+        if (avatar != null)
+            PhotonNetwork.Destroy(avatar.gameObject);
+
+        CreateAvatar();
     }
 }

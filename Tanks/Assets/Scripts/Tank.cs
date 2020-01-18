@@ -6,7 +6,6 @@ using UnityEngine;
 public class Tank : MonoBehaviourPun
 {
     public Health Health { get; private set; }
-    [SerializeField] GameObject body;
 
 
     private void Awake()
@@ -18,7 +17,7 @@ public class Tank : MonoBehaviourPun
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
-            Health.DoDamage(10);
+            Health.DoDamage(100);
     }
 
     private void HandleDeath()
@@ -26,12 +25,5 @@ public class Tank : MonoBehaviourPun
         PhotonNetwork.LocalPlayer.AddScore(-1);
         GameManager.instance.ScoreManager.UpdateScore();
         GameManager.instance.GoToNextRound();
-        body.SetActive(false);
-
-    }
-
-    public void Restart()
-    {
-        
     }
 }

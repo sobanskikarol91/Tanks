@@ -14,7 +14,7 @@ public class Health : MonoBehaviourPun, IPunObservable, IRestart
 
     public delegate void DeathEventHandler();
     public event DeathEventHandler Death;
-
+    private bool IsDeath => currentHealth <=0;
 
     private void Awake()
     {
@@ -23,13 +23,17 @@ public class Health : MonoBehaviourPun, IPunObservable, IRestart
 
     public void DoDamage(float damage)
     {
+        if (IsDeath) return;
+
         currentHealth -= damage;
         photonView.RPC("OnHealthChange", RpcTarget.AllViaServer, currentHealth, maxHealth, damage);
         AudioSource.PlayClipAtPoint(damageSnd, transform.position);
         currentHealth--;
 
+        OnDie();
+
         if (currentHealth <= 0)
-            photonView.RPC("OnDie", RpcTarget.AllViaServer);
+            photonView.RPC("OnDie", RpcTarget.Others);
     }
 
     [PunRPC]
@@ -44,6 +48,9 @@ public class Health : MonoBehaviourPun, IPunObservable, IRestart
         AudioSource.PlayClipAtPoint(deathSnd, transform.position);
         currentHealth = 0;
         Death?.Invoke();
+
+        if (PhotonNetwork.IsMasterClient)
+            PhotonNetwork.Destroy(gameObject);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
