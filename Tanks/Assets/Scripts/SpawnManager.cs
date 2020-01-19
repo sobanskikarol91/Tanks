@@ -18,7 +18,7 @@ public class SpawnManager : MonoBehaviour
         respawnPanel.SetActive(false);
     }
 
-    public void Respawn()
+    public void Restart()
     {
         StartCoroutine(WaitToRespawn());
     }

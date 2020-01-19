@@ -1,9 +1,14 @@
 ﻿using UnityEngine;
 using Photon.Pun;
+using System.Collections.Generic;
+using UnityEngine.Tilemaps;
+using System.Linq;
 
-public class WoodWall : Wall
+public class WoodWall : Wall, IRestart
 {
     private PhotonView photonView;
+
+    private Dictionary<Vector3Int, TileBase> changedTiles = new Dictionary<Vector3Int, TileBase>();
 
     protected override void Awake()
     {
@@ -34,6 +39,24 @@ public class WoodWall : Wall
     private void DestroyTile(Vector3 tile)
     {
         Vector3Int position = new Vector3Int((int)tile.x, (int)tile.y, 0);
+        TileBase baseTile = tilemap.GetTile(position);
+        if (baseTile == null) return;
+
+        changedTiles.Add(position, baseTile);
         tilemap.SetTile(position, null);
+    }
+
+    public void Restart()
+    {
+        var values = changedTiles.Keys.ToArray();
+
+        for (int i = 0; i < changedTiles.Count; i++)
+        {
+            Vector3Int position = values[i];
+            TileBase tile = changedTiles[position];
+            tilemap.SetTile(position, tile);
+        }
+
+        changedTiles.Clear();
     }
 }

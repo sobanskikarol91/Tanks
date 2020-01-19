@@ -2,14 +2,14 @@
 using UnityEngine;
 
 
-public class GameManager : MonoBehaviourPun
+public class GameManager : MonoBehaviourPun, IRestart
 {
     public static GameManager instance;
 
     [HideInInspector] public ScoreManager ScoreManager;
     [HideInInspector] public SpawnManager SpawnManager;
     [HideInInspector] public NetworkManager NetworkManager;
-
+    [HideInInspector] public EnviromentManager EnviromentManager;
 
     private void Awake()
     {
@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviourPun
         SpawnManager = GetComponent<SpawnManager>();
         ScoreManager = GetComponent<ScoreManager>();
         NetworkManager = GetComponent<NetworkManager>();
+        EnviromentManager = GetComponent<EnviromentManager>();
     }
 
     public void Restart()
@@ -28,7 +29,8 @@ public class GameManager : MonoBehaviourPun
     [PunRPC]
     void GoToNextRound()
     {
+        EnviromentManager.Restart();
         ScoreManager.UpdateScore();
-        SpawnManager.Respawn();
+        SpawnManager.Restart();
     }
 }
