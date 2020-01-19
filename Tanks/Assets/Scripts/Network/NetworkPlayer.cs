@@ -27,7 +27,7 @@ public class NetworkPlayer : MonoBehaviourPun, IRestart
     {
         Debug.Log("Create avatar: " + NetworkManager.ConnectedPlayers);
         Transform spawnPoint = GameManager.instance.SpawnManager.SpawnPoints[nr].transform;
-        avatar = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Player" + nr), spawnPoint.position, spawnPoint.rotation).GetComponent<Tank>();
+        avatar = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Tank" + nr), spawnPoint.position, spawnPoint.rotation).GetComponent<Tank>();
     }
 
     [PunRPC]

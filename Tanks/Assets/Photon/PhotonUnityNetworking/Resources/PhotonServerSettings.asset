@@ -41,5 +41,6 @@ MonoBehaviour:
   - OnDie
   - UpdateScore
   - GoToNextRound
+  - DestroyTile
   DisableAutoOpenWizard: 1
   ShowSettings: 0

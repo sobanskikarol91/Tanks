@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 2386763402866012561}
   - component: {fileID: 8144189062109278757}
   m_Layer: 0
-  m_Name: Player0
+  m_Name: Tank0
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -358,7 +358,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b41f65150dbb1d64b9a18cd93020c17e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.04
+  m_Volume: 0.02
   m_Pitch: 1
   Loop: 1
   Mute: 0
