@@ -384,6 +384,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1238644622206913124}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &333707510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333707509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 998df945fdb7f24459856d98174a011b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitSound: {fileID: 8300000, guid: 4be0e40067a149b4f94e3922fad135de, type: 3}
 --- !u!19719996 &333707513
 TilemapCollider2D:
   m_ObjectHideFlags: 0
