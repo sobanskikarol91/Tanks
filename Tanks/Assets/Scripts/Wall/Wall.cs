@@ -7,7 +7,7 @@ public abstract class Wall : MonoBehaviour
 
     protected Tilemap tilemap;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         tilemap = GetComponent<Tilemap>();
     }

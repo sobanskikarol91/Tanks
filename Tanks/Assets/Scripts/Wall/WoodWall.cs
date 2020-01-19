@@ -3,6 +3,14 @@ using Photon.Pun;
 
 public class WoodWall : Wall
 {
+    private PhotonView photonView;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        photonView = GetComponent<PhotonView>();
+    }
+
     protected override void OnCollisionEffect(Collision2D collision)
     {
         FindHitTile(collision);
@@ -17,12 +25,15 @@ public class WoodWall : Wall
             Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
             Vector2 position = hit.point - rb.velocity * 0.01f;
             Vector3Int tile = tilemap.WorldToCell(position);
-            DestroyTile(tile);
+
+            photonView.RPC("DestroyTile", RpcTarget.All, (Vector3)tile);
         }
     }
 
-    private void DestroyTile(Vector3Int tile)
+    [PunRPC]
+    private void DestroyTile(Vector3 tile)
     {
-        tilemap.SetTile(tile, null);
+        Vector3Int position = new Vector3Int((int)tile.x, (int)tile.y, 0);
+        tilemap.SetTile(position, null);
     }
 }
