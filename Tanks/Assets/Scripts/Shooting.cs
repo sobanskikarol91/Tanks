@@ -21,6 +21,7 @@ public class Shooting : MonoBehaviourPun
     private void Fire()
     {
         GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
+        SpawnManager.spawnedObjects.Add(bullet);
         bullet.GetComponent<Bullet>().InitializeBullet(photonView.Owner, -transform.up, 0);
         AudioSource.PlayClipAtPoint(shotSnd, transform.position);
     }

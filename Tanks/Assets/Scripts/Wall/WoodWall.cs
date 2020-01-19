@@ -10,6 +10,7 @@ public class WoodWall : Wall, IRestart
 
     private Dictionary<Vector3Int, TileBase> changedTiles = new Dictionary<Vector3Int, TileBase>();
 
+
     protected override void Awake()
     {
         base.Awake();

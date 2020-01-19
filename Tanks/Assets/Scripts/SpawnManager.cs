@@ -3,10 +3,12 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class SpawnManager : MonoBehaviour
 {
     public Transform[] SpawnPoints => spawnPoints;
+    public static List<GameObject> spawnedObjects = new List<GameObject>();
     [SerializeField] Transform[] spawnPoints;
     [SerializeField] float respawnTime = 3f;
     [SerializeField] Text timeTxt;
@@ -20,6 +22,8 @@ public class SpawnManager : MonoBehaviour
 
     public void Restart()
     {
+        spawnedObjects.ForEach(s => Destroy(s));
+        spawnedObjects.Clear();
         StartCoroutine(WaitToRespawn());
     }
 

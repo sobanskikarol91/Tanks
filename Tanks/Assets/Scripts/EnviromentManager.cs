@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
-using Photon.Pun;
+﻿using UnityEngine;
+
 
 public class EnviromentManager : MonoBehaviour, IRestart
 {

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviourPun, IRestart
     [HideInInspector] public NetworkManager NetworkManager;
     [HideInInspector] public EnviromentManager EnviromentManager;
 
+
     private void Awake()
     {
         instance = this;

@@ -14,7 +14,16 @@ public class Tank : MonoBehaviourPun
         Health = GetComponent<Health>();
 
         if (photonView.IsMine)
-            Health.Death += HandleDeath;
+            ClientInit();
+    }
+
+    private void ClientInit()
+    {
+        Health.Death += HandleDeath;
+
+        Renderer[] renderer = gameObject.GetComponentsInChildren<Renderer>();
+        Array.ForEach(renderer, r => r.sortingLayerName = "Foreground");
+        gameObject.GetComponentInChildren<Canvas>().sortingLayerName = "Foreground";
     }
 
     private void Update()
