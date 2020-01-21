@@ -24,6 +24,7 @@ public class Tank : MonoBehaviourPun
         Renderer[] renderer = gameObject.GetComponentsInChildren<Renderer>();
         Array.ForEach(renderer, r => r.sortingLayerName = "Foreground");
         gameObject.GetComponentInChildren<Canvas>().sortingLayerName = "Foreground";
+        gameObject.AddComponent<CameraFollower>();
     }
 
     private void Update()
