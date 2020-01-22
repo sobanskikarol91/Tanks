@@ -8,10 +8,12 @@ public class Shooting : MonoBehaviourPun
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] AudioClip shotSnd;
 
+    private float minDistanceToFire = 0.2f;
+
 
     private void Update()
     {
-        if (photonView.IsMine && Input.GetMouseButtonDown(0))
+        if (IsGunFarAwayFromWall() && photonView.IsMine && Input.GetMouseButtonDown(0))
         {
             photonView.RPC("Fire", RpcTarget.All);
         }
@@ -24,5 +26,10 @@ public class Shooting : MonoBehaviourPun
         SpawnManager.spawnedObjects.Add(bullet);
         bullet.GetComponent<Bullet>().InitializeBullet(photonView.Owner, -transform.up, 0);
         AudioSource.PlayClipAtPoint(shotSnd, transform.position);
+    }
+
+    bool IsGunFarAwayFromWall()
+    {
+        return !Physics2D.Raycast(spawnPoint.position, -transform.up, minDistanceToFire);
     }
 }
