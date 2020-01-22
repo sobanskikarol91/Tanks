@@ -12,7 +12,6 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-        Invoke("Destroy", 3f);
     }
 
     private void Update()
@@ -26,21 +25,10 @@ public class Bullet : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag.Equals("Player"))
-            Destroy();
-    }
-
     public void InitializeBullet(Player owner, Vector3 direction, float lag)
     {
         Owner = owner;
         rigidbody.velocity = direction * speed;
         rigidbody.position += rigidbody.velocity * lag;
-    }
-
-    void Destroy()
-    {
-        Destroy(gameObject);
     }
 }

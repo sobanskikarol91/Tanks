@@ -7,12 +7,6 @@ namespace Photon.Pun.Demo.Asteroids
     {
         public Player Owner { get; private set; }
 
-        public void Start()
-        {
-            if (photonView.IsMine)
-                Invoke("DestroyAfterTime", 3f);
-        }
-
         public void OnCollisionEnter(Collision collision)
         {
             if (photonView.IsMine)
@@ -26,11 +20,6 @@ namespace Photon.Pun.Demo.Asteroids
             Rigidbody rigidbody = GetComponent<Rigidbody>();
             rigidbody.velocity = originalDirection * 200.0f;
             rigidbody.position += rigidbody.velocity * lag;
-        }
-
-        void DestroyAfterTime()
-        {
-            PhotonNetwork.Destroy(gameObject);
         }
     }
 }

@@ -318,6 +318,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7647008997029453872, guid: d3bf031d0c9ac7f4190c3920b602c700,
     type: 3}
   shotSnd: {fileID: 8300000, guid: 5401264aa0438b04082650b934ef85b6, type: 3}
+  maxBullets: 3
 --- !u!114 &8563412577995395696
 MonoBehaviour:
   m_ObjectHideFlags: 0
