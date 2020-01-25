@@ -31,4 +31,9 @@ public class Bullet : MonoBehaviour
         rigidbody.velocity = direction * speed;
         rigidbody.position += rigidbody.velocity * lag;
     }
+
+    public void IncreaseVelocity(float multiplayer)
+    {
+        rigidbody.velocity *= multiplayer;
+    }
 }
