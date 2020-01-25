@@ -1,4 +1,5 @@
-﻿using Photon.Pun;
+﻿using System;
+using Photon.Pun;
 using UnityEngine;
 
 
@@ -22,6 +23,16 @@ public class GameManager : MonoBehaviourPun, IRestart
         EnviromentManager = GetComponent<EnviromentManager>();
     }
 
+    private void Start()
+    {
+        SpawnManager.Restart += AfterRestart;
+    }
+
+    private void AfterRestart()
+    {
+        EnviromentManager.Restart();
+    }
+
     public void Restart()
     {
         photonView.RPC("GoToNextRound", RpcTarget.AllViaServer);
@@ -30,8 +41,7 @@ public class GameManager : MonoBehaviourPun, IRestart
     [PunRPC]
     void GoToNextRound()
     {
-        EnviromentManager.Restart();
         ScoreManager.UpdateScore();
-        SpawnManager.Restart();
+        SpawnManager.RestartRound();
     }
 }

@@ -4,6 +4,7 @@ using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -14,20 +15,21 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] Text timeTxt;
     [SerializeField] GameObject respawnPanel;
 
+    public event Action Restart;
 
     private void Awake()
     {
         respawnPanel.SetActive(false);
     }
 
-    public void Restart()
+    public void RestartRound()
     {
         spawnedObjects.ForEach(s => Destroy(s));
         spawnedObjects.Clear();
-        StartCoroutine(WaitToRespawn());
+        StartCoroutine(OnRestart());
     }
 
-    IEnumerator WaitToRespawn()
+    IEnumerator OnRestart()
     {
         float leftTime = respawnTime;
 
@@ -42,6 +44,7 @@ public class SpawnManager : MonoBehaviour
 
         respawnPanel.SetActive(false);
         RespawnPlayer();
+        Restart?.Invoke();
     }
 
     void RespawnPlayer()
