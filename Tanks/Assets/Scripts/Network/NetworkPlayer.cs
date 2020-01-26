@@ -19,7 +19,7 @@ public class NetworkPlayer : MonoBehaviourPun, IRestart
     {
         nr = NetworkManager.ConnectedPlayers;
         CreateAvatar();
-
+        PhotonNetwork.LocalPlayer.NickName = "Player " + nr;
         photonView.RPC("UpdatePlayersInfo", RpcTarget.AllBuffered);
     }
 
