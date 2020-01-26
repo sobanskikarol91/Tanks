@@ -33,7 +33,7 @@ public class Shooting : MonoBehaviourPun
     private void Update()
     {
         if (IsGunFarAwayFromWall() && photonView.IsMine && Input.GetMouseButtonDown(0))
-            photonView.RPC("Fire", RpcTarget.All);
+            photonView.RPC(Method.GetName(Fire), RpcTarget.All);
     }
 
     [PunRPC]

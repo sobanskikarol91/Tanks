@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Photon.Pun;
+using System;
 
 public class Bullet : MonoBehaviourPun, IRestart
 {
@@ -51,8 +52,9 @@ public class Bullet : MonoBehaviourPun, IRestart
 
     public void Restart()
     {
+
         if (photonView.IsMine)
-            photonView.RPC("DeactivateSelf", RpcTarget.All);
+            photonView.RPC(Method.GetName(DeactivateSelf), RpcTarget.All);
     }
 
     [PunRPC]
