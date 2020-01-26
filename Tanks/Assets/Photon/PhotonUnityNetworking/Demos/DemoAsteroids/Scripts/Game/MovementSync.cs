@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 
-public class BulletMovement : MonoBehaviourPun, IPunObservable
+public class MovementSync : MonoBehaviourPun, IPunObservable
 {
     private Rigidbody2D rb;
     private Vector2 networkPosition;
     private float networkRotation;
-
+    private float lerpFactor = 5f;
 
     private void Awake()
     {
@@ -17,8 +17,8 @@ public class BulletMovement : MonoBehaviourPun, IPunObservable
     {
         if (!photonView.IsMine)
         {
-            rb.position = Vector3.MoveTowards(rb.position, networkPosition, Time.fixedDeltaTime);
-            rb.rotation = Mathf.Lerp(rb.rotation, networkRotation, Time.fixedDeltaTime * 100);
+            rb.position = Vector3.MoveTowards(rb.position, networkPosition, Time.fixedDeltaTime * lerpFactor);
+            rb.rotation = Mathf.Lerp(rb.rotation, networkRotation, Time.deltaTime * lerpFactor);
         }
     }
 

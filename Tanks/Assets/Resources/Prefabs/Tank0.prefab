@@ -206,8 +206,8 @@ GameObject:
   - component: {fileID: 8756160938646636883}
   - component: {fileID: -4976540149888366001}
   - component: {fileID: 8563412577995395696}
-  - component: {fileID: 2386763402866012561}
   - component: {fileID: 8144189062109278757}
+  - component: {fileID: 7879169029837999807}
   m_Layer: 0
   m_Name: Tank0
   m_TagString: Player
@@ -281,7 +281,7 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 2386763402866012561}
+  - {fileID: 7879169029837999807}
   - {fileID: 8563412577995395696}
   viewIdField: 0
   InstantiationId: 0
@@ -335,18 +335,6 @@ MonoBehaviour:
   currentHealth: 0
   deathSnd: {fileID: 8300000, guid: ccbdae05529284646bfad8d00fe8608f, type: 3}
   damageSnd: {fileID: 8300000, guid: e577e09b00fb4d54eb76c751491b25c8, type: 3}
---- !u!114 &2386763402866012561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3031034062744059160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 356fe8b966f2b9f4787898497584d618, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &8144189062109278757
 AudioSource:
   m_ObjectHideFlags: 0
@@ -443,6 +431,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7879169029837999807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3031034062744059160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ebf79d92329f2c4daadb96f2f46e153, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3031034063086220744
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,7 +667,7 @@ Transform:
   m_Children:
   - {fileID: 3031034063164677851}
   - {fileID: 5396338635119324787}
-  - {fileID: 1135051982}
+  - {fileID: 2880088616325760456}
   m_Father: {fileID: 3031034062744059161}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -898,7 +898,7 @@ PrefabInstance:
         type: 3}
       propertyPath: healthImage
       value: 
-      objectReference: {fileID: 1487961788}
+      objectReference: {fileID: 2880088616325760459}
     - target: {fileID: 853263183510912345, guid: 4d2d2a562b6b25e459f61a7dfb25da3e,
         type: 3}
       propertyPath: health
@@ -926,13 +926,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d2d2a562b6b25e459f61a7dfb25da3e, type: 3}
---- !u!224 &1135051982 stripped
+--- !u!224 &2880088616325760456 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2880088615258014600, guid: 4d2d2a562b6b25e459f61a7dfb25da3e,
     type: 3}
   m_PrefabInstance: {fileID: 2880088616325760838}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &1487961788 stripped
+--- !u!224 &2880088616325760459 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2880088615106263546, guid: 4d2d2a562b6b25e459f61a7dfb25da3e,
     type: 3}
