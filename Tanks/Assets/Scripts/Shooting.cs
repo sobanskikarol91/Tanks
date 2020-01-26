@@ -12,45 +12,47 @@ public class Shooting : MonoBehaviourPun
     [SerializeField] float maxBullets = 3;
 
     private float minDistanceToFire = 0.2f;
-    private Queue<GameObject> bulletsPool = new Queue<GameObject>();
+    public Queue<GameObject> bulletsPool = new Queue<GameObject>();
 
 
     private void Awake()
     {
-        //if (photonView.IsMine)
-        //    PrepareBulletPool();
+        if (photonView.IsMine)
+            PrepareBulletPool();
     }
 
     private void PrepareBulletPool()
     {
         for (int i = 0; i < maxBullets; i++)
         {
-            GameObject bullet = PhotonNetwork.Instantiate(Path.Combine("Prefabs", bulletPrefab.name), transform.position, Quaternion.identity);
-            bulletsPool.Enqueue(bullet);
+            PhotonView bullet = PhotonNetwork.Instantiate(Path.Combine("Prefabs", bulletPrefab.name), transform.position, Quaternion.identity).GetComponent<PhotonView>();
+            bullet.RPC("Init", RpcTarget.AllBuffered, photonView.ViewID);
         }
     }
 
     private void Update()
     {
         if (IsGunFarAwayFromWall() && photonView.IsMine && Input.GetMouseButtonDown(0))
-            Fire();
+            photonView.RPC("Fire", RpcTarget.All);
     }
 
+    [PunRPC]
     private void Fire()
     {
-        //GameObject bullet = bulletsPool.Dequeue();
-        //bullet.SetActive(true);
-        //bullet.transform.position = spawnPoint.position;
-        //SpawnManager.spawnedObjects.Add(bullet);
+        Bullet bullet = bulletsPool.Dequeue().GetComponent<Bullet>();
+        bullet.gameObject.SetActive(true);
+        bullet.transform.position = spawnPoint.position;
+        // SpawnManager.spawnedObjects.Add(bullet);
+        //bullet.GetComponent<Bullet>().Init(photonView.Owner, -transform.up, 0);
+        AudioSource.PlayClipAtPoint(shotSnd, transform.position);
+        bullet.Shot(spawnPoint.transform.position, -transform.up);
+        bulletsPool.Enqueue(bullet.gameObject);
+
+        //PhotonView bullet = PhotonNetwork.Instantiate(Path.Combine("Prefabs", bulletPrefab.name), transform.position, Quaternion.identity).GetComponent<PhotonView>();
+
+        //bullet.RPC("Shot", RpcTarget.All, spawnPoint.position);
         //bullet.GetComponent<Bullet>().InitializeBullet(photonView.Owner, -transform.up, 0);
         //AudioSource.PlayClipAtPoint(shotSnd, transform.position);
-        //bulletsPool.Enqueue(bullet);
-
-        PhotonView bullet = PhotonNetwork.Instantiate(Path.Combine("Prefabs", bulletPrefab.name), transform.position, Quaternion.identity).GetComponent<PhotonView>();
-
-        bullet.RPC("Shot", RpcTarget.All, spawnPoint.position);
-        bullet.GetComponent<Bullet>().InitializeBullet(photonView.Owner, -transform.up, 0);
-        AudioSource.PlayClipAtPoint(shotSnd, transform.position);
     }
 
     bool IsGunFarAwayFromWall()

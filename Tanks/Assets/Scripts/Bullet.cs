@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
-using Photon.Realtime;
 using Photon.Pun;
 
-public class Bullet : MonoBehaviourPun, IPunInstantiateMagicCallback, IRestart
+public class Bullet : MonoBehaviourPun, IRestart
 {
-    public Player Owner { get; private set; }
     [SerializeField] float speed = 10;
     private new Rigidbody2D rigidbody;
 
@@ -15,8 +13,14 @@ public class Bullet : MonoBehaviourPun, IPunInstantiateMagicCallback, IRestart
         rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    private void OnDestroy()
     {
+        SpawnManager.spawnedObjects.Remove(this);
+    }
+
+    private void FixedUpdate()
+    {
+        rigidbody.velocity = rigidbody.velocity.normalized * speed;
         SetRotationAccordingToMovement();
     }
 
@@ -26,11 +30,11 @@ public class Bullet : MonoBehaviourPun, IPunInstantiateMagicCallback, IRestart
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
-    public void InitializeBullet(Player owner, Vector3 direction, float lag)
+    [PunRPC]
+    public void Init(int photonId)
     {
-        Owner = owner;
-        rigidbody.velocity = direction * speed;
-        rigidbody.position += rigidbody.velocity * lag;
+        PhotonNetwork.GetPhotonView(photonId).GetComponent<Shooting>().bulletsPool.Enqueue(gameObject);
+        gameObject.SetActive(false);
     }
 
     public void IncreaseVelocity(float multiplayer)
@@ -38,32 +42,22 @@ public class Bullet : MonoBehaviourPun, IPunInstantiateMagicCallback, IRestart
         rigidbody.velocity *= multiplayer;
     }
 
-    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    public void Shot(Vector2 position, Vector2 direction)
     {
-        Debug.Log("bullet: " + info.photonView.gameObject.name + " " + info.Sender.NickName);
-        gameObject.SetActive(false);
-    }
-
-    [PunRPC]
-    public void Shot(Vector3 position)
-    {
-        gameObject.SetActive(true);
+        rigidbody.velocity = direction * speed;
         transform.position = position;
+        gameObject.SetActive(true);
     }
 
     public void Restart()
     {
         if (photonView.IsMine)
-            PhotonNetwork.Destroy(gameObject);
+            photonView.RPC("DeactivateSelf", RpcTarget.All);
     }
 
-    private void OnDestroy()
+    [PunRPC]
+    void DeactivateSelf()
     {
-        SpawnManager.spawnedObjects.Remove(this);
-    }
-
-    private void FixedUpdate()
-    {
-        rigidbody.velocity = rigidbody.velocity.normalized * speed;
+        gameObject.SetActive(false);
     }
 }
