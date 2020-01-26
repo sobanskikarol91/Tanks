@@ -19,7 +19,6 @@ public class HealthBar : MonoBehaviour
 
     public void UpdateBar(float current, float max)
     {
-        Debug.Log("Update bar");
         float percantage = current / max;
         healthImage.localScale = new Vector2(percantage, healthImage.localScale.y);
         healthImage.GetComponent<Image>().color = Color.Lerp(red, green, percantage);

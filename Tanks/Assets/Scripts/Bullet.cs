@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using Photon.Realtime;
+using Photon.Pun;
 
-
-public class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviourPun, IPunInstantiateMagicCallback, IRestart
 {
     public Player Owner { get; private set; }
     [SerializeField] float speed = 10;
@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
 
     private void Awake()
     {
+        SpawnManager.spawnedObjects.Add(this);
         rigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -35,5 +36,29 @@ public class Bullet : MonoBehaviour
     public void IncreaseVelocity(float multiplayer)
     {
         rigidbody.velocity *= multiplayer;
+    }
+
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        Debug.Log("bullet: " + info.photonView.gameObject.name + " " + info.Sender.NickName);
+        gameObject.SetActive(false);
+    }
+
+    [PunRPC]
+    public void Shot(Vector3 position)
+    {
+        gameObject.SetActive(true);
+        transform.position = position;
+    }
+
+    public void Restart()
+    {
+        if (photonView.IsMine)
+            PhotonNetwork.Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        SpawnManager.spawnedObjects.Remove(this);
     }
 }

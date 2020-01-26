@@ -24,6 +24,7 @@ public class Damagable : MonoBehaviourPun
         if (health)
             health.DoDamage(damage);
 
-        gameObject.SetActive(false);
+        if (photonView.IsMine)
+            PhotonNetwork.Destroy(gameObject);
     }
 }

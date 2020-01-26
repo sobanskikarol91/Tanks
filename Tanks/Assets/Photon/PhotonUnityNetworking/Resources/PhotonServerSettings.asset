@@ -42,5 +42,7 @@ MonoBehaviour:
   - UpdateScore
   - GoToNextRound
   - DestroyTile
+  - Shot
+  - Deactivate
   DisableAutoOpenWizard: 1
   ShowSettings: 0

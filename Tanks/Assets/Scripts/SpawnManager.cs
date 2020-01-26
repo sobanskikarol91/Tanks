@@ -9,7 +9,7 @@ using System;
 public class SpawnManager : MonoBehaviour
 {
     public Transform[] SpawnPoints => spawnPoints;
-    public static List<GameObject> spawnedObjects = new List<GameObject>();
+    public static List<IRestart> spawnedObjects = new List<IRestart>();
     [SerializeField] Transform[] spawnPoints;
     [SerializeField] float respawnTime = 3f;
     [SerializeField] Text timeTxt;
@@ -24,7 +24,7 @@ public class SpawnManager : MonoBehaviour
 
     public void RestartRound()
     {
-        spawnedObjects.ForEach(s => Destroy(s));
+        spawnedObjects.ForEach(s => s.Restart());
         spawnedObjects.Clear();
         StartCoroutine(OnRestart());
     }
