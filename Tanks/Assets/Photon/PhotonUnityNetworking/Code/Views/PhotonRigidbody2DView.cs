@@ -48,7 +48,7 @@ namespace Photon.Pun
         {
             if (!this.m_PhotonView.IsMine)
             {
-                this.m_Body.position = Vector2.MoveTowards(this.m_Body.position, this.m_NetworkPosition, this.m_Distance * (1.0f / PhotonNetwork.SerializationRate));
+                this.m_Body.position = Vector2.MoveTowards(this.m_Body.position, this.m_NetworkPosition, Time.fixedDeltaTime * 5);
                 this.m_Body.rotation = Mathf.MoveTowards(this.m_Body.rotation, this.m_NetworkRotation, this.m_Angle * (1.0f / PhotonNetwork.SerializationRate));
             }
         }

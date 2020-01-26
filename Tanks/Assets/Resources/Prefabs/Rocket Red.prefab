@@ -120,7 +120,8 @@ GameObject:
   - component: {fileID: 155702901312849238}
   - component: {fileID: 2074837284903601819}
   - component: {fileID: 7441891582596835102}
-  - component: {fileID: -121476865664798931}
+  - component: {fileID: -5850895214073620021}
+  - component: {fileID: -605317411872541763}
   m_Layer: 0
   m_Name: Rocket Red
   m_TagString: Untagged
@@ -208,11 +209,12 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: -121476865664798931}
+  - {fileID: -5850895214073620021}
+  - {fileID: -605317411872541763}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-121476865664798931
+--- !u!114 &-5850895214073620021
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -221,6 +223,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 7647008997029453872}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ebf79d92329f2c4daadb96f2f46e153, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 1
+  m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &-605317411872541763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7647008997029453872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0

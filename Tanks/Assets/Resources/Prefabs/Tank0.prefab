@@ -203,11 +203,12 @@ GameObject:
   - component: {fileID: 3231240693200383229}
   - component: {fileID: 981172834543711390}
   - component: {fileID: -4228126371414820146}
+  - component: {fileID: 3314478047888462603}
   - component: {fileID: 8756160938646636883}
   - component: {fileID: -4976540149888366001}
   - component: {fileID: 8563412577995395696}
   - component: {fileID: 8144189062109278757}
-  - component: {fileID: 7879169029837999807}
+  - component: {fileID: -4823389743750098079}
   m_Layer: 0
   m_Name: Tank0
   m_TagString: Player
@@ -281,11 +282,28 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 7879169029837999807}
   - {fileID: 8563412577995395696}
+  - {fileID: 3314478047888462603}
+  - {fileID: -4823389743750098079}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &3314478047888462603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3031034062744059160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 1
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!114 &8756160938646636883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -431,7 +449,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7879169029837999807
+--- !u!114 &-4823389743750098079
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -440,9 +458,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3031034062744059160}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ebf79d92329f2c4daadb96f2f46e153, type: 3}
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!1 &3031034063086220744
 GameObject:
   m_ObjectHideFlags: 0

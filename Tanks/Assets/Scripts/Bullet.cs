@@ -61,4 +61,9 @@ public class Bullet : MonoBehaviourPun, IPunInstantiateMagicCallback, IRestart
     {
         SpawnManager.spawnedObjects.Remove(this);
     }
+
+    private void FixedUpdate()
+    {
+        rigidbody.velocity = rigidbody.velocity.normalized * speed;
+    }
 }

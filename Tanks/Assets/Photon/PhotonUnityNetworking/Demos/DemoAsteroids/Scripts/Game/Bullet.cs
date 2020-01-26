@@ -6,6 +6,14 @@ namespace Photon.Pun.Demo.Asteroids
     public class Bullet : MonoBehaviourPun
     {
         public Player Owner { get; private set; }
+        public float speed = 200f;
+
+        private new Rigidbody rigidbody;
+
+        private void Awake()
+        {
+            rigidbody = GetComponent<Rigidbody>();
+        }
 
         public void OnCollisionEnter(Collision collision)
         {
@@ -16,10 +24,15 @@ namespace Photon.Pun.Demo.Asteroids
         public void InitializeBullet(Player owner, Vector3 originalDirection, float lag)
         {
             Owner = owner;
-            transform.forward = originalDirection;
-            Rigidbody rigidbody = GetComponent<Rigidbody>();
-            rigidbody.velocity = originalDirection * 200.0f;
+            transform.forward = originalDirection.normalized;
+
+            rigidbody.velocity = originalDirection * speed;
             rigidbody.position += rigidbody.velocity * lag;
+        }
+
+        private void FixedUpdate()
+        {
+            rigidbody.velocity = rigidbody.velocity.normalized * speed;
         }
     }
 }
