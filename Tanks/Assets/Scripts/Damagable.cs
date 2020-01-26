@@ -25,7 +25,7 @@ public class Damagable : MonoBehaviourPun
             health.DoDamage(damage);
 
         if (photonView.IsMine)
-            photonView.RPC("HideObject", RpcTarget.All);
+            photonView.RPC(nameof(HideObject), RpcTarget.All);
     }
 
     [PunRPC]

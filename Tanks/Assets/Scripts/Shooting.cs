@@ -33,7 +33,7 @@ public class Shooting : MonoBehaviourPun
     private void Update()
     {
         if (IsGunFarAwayFromWall() && photonView.IsMine && Input.GetMouseButtonDown(0))
-            photonView.RPC(Method.GetName(Fire), RpcTarget.All);
+            photonView.RPC(nameof(Fire), RpcTarget.All);
     }
 
     [PunRPC]
@@ -47,12 +47,6 @@ public class Shooting : MonoBehaviourPun
         AudioSource.PlayClipAtPoint(shotSnd, transform.position);
         bullet.Shot(spawnPoint.transform.position, -transform.up);
         bulletsPool.Enqueue(bullet.gameObject);
-
-        //PhotonView bullet = PhotonNetwork.Instantiate(Path.Combine("Prefabs", bulletPrefab.name), transform.position, Quaternion.identity).GetComponent<PhotonView>();
-
-        //bullet.RPC("Shot", RpcTarget.All, spawnPoint.position);
-        //bullet.GetComponent<Bullet>().InitializeBullet(photonView.Owner, -transform.up, 0);
-        //AudioSource.PlayClipAtPoint(shotSnd, transform.position);
     }
 
     bool IsGunFarAwayFromWall()

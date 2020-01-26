@@ -52,14 +52,7 @@ public class Bullet : MonoBehaviourPun, IRestart
 
     public void Restart()
     {
-
         if (photonView.IsMine)
-            photonView.RPC(Method.GetName(DeactivateSelf), RpcTarget.All);
-    }
-
-    [PunRPC]
-    void DeactivateSelf()
-    {
-        gameObject.SetActive(false);
+            PhotonNetwork.Destroy(gameObject);
     }
 }

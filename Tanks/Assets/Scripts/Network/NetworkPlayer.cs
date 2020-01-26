@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 using System.IO;
-using System;
+
 
 public class NetworkPlayer : MonoBehaviourPun, IRestart
 {
@@ -20,7 +20,7 @@ public class NetworkPlayer : MonoBehaviourPun, IRestart
         nr = NetworkManager.ConnectedPlayers;
         CreateAvatar();
         PhotonNetwork.LocalPlayer.NickName = "Player " + nr;
-        photonView.RPC("UpdatePlayersInfo", RpcTarget.AllBuffered);
+        photonView.RPC(nameof(UpdatePlayersInfo), RpcTarget.AllBuffered);
     }
 
     private void CreateAvatar()

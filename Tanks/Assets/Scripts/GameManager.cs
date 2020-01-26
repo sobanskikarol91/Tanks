@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviourPun, IRestart
 
     public void Restart()
     {
-        photonView.RPC("GoToNextRound", RpcTarget.AllViaServer);
+        photonView.RPC(nameof(GoToNextRound), RpcTarget.AllViaServer);
     }
 
     [PunRPC]
