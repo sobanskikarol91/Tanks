@@ -25,7 +25,6 @@ namespace Photon.Pun.Demo.Asteroids
         {
             Owner = owner;
             transform.forward = originalDirection.normalized;
-
             rigidbody.velocity = originalDirection * speed;
             rigidbody.position += rigidbody.velocity * lag;
         }

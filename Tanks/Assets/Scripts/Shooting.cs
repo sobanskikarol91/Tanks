@@ -24,10 +24,13 @@ public class Shooting : MonoBehaviourPun
     private void PrepareBulletPool()
     {
         for (int i = 0; i < maxBullets; i++)
-        {
-            PhotonView bullet = PhotonNetwork.Instantiate(Path.Combine("Prefabs", bulletPrefab.name), transform.position, Quaternion.identity).GetComponent<PhotonView>();
-            bullet.RPC("Init", RpcTarget.AllBuffered, photonView.ViewID);
-        }
+            AddBulletToPool();
+    }
+
+    private void AddBulletToPool()
+    {
+        PhotonView bullet = PhotonNetwork.Instantiate(Path.Combine("Prefabs", bulletPrefab.name), transform.position, Quaternion.identity).GetComponent<PhotonView>();
+        bullet.RPC("Init", RpcTarget.AllBuffered, photonView.ViewID);
     }
 
     private void Update()
@@ -43,7 +46,6 @@ public class Shooting : MonoBehaviourPun
         bullet.gameObject.SetActive(true);
         bullet.transform.position = spawnPoint.position;
         // SpawnManager.spawnedObjects.Add(bullet);
-        //bullet.GetComponent<Bullet>().Init(photonView.Owner, -transform.up, 0);
         AudioSource.PlayClipAtPoint(shotSnd, transform.position);
         bullet.Shot(spawnPoint.transform.position, -transform.up);
         bulletsPool.Enqueue(bullet.gameObject);
@@ -52,5 +54,11 @@ public class Shooting : MonoBehaviourPun
     bool IsGunFarAwayFromWall()
     {
         return !Physics2D.Raycast(spawnPoint.position, -transform.up, minDistanceToFire);
+    }
+
+    public void IncreaseBullets()
+    {
+        maxBullets++;
+        AddBulletToPool();
     }
 }
