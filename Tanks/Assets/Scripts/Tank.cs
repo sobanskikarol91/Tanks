@@ -19,7 +19,8 @@ public class Tank : MonoBehaviourPun
 
     private void ClientInit()
     {
-        Health.Death += HandleDeath;
+        if (photonView.IsMine)
+            Health.Death += HandleDeath;
 
         Renderer[] renderer = gameObject.GetComponentsInChildren<Renderer>();
         Array.ForEach(renderer, r => r.sortingLayerName = "Foreground");
@@ -35,9 +36,15 @@ public class Tank : MonoBehaviourPun
 
     private void HandleDeath()
     {
-        if (photonView.IsMine)
-            PhotonNetwork.LocalPlayer.AddScore(-1);
-
+        AudioSource.PlayClipAtPoint(GameManager.instance.settings.loseSnd, transform.position);
+        PhotonNetwork.LocalPlayer.AddScore(-1);
+        photonView.RPC(nameof(HandleWin), RpcTarget.Others);
         GameManager.instance.Restart();
+    }
+
+    [PunRPC]
+    private void HandleWin()
+    {
+        AudioSource.PlayClipAtPoint(GameManager.instance.settings.winSnd, transform.position);
     }
 }

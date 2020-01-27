@@ -6,12 +6,13 @@ using UnityEngine;
 public class GameManager : MonoBehaviourPun, IRestart
 {
     public static GameManager instance;
+    public GameSettings settings;
 
     [HideInInspector] public ScoreManager ScoreManager;
     [HideInInspector] public SpawnManager SpawnManager;
     [HideInInspector] public NetworkManager NetworkManager;
     [HideInInspector] public EnviromentManager EnviromentManager;
-
+    
 
     private void Awake()
     {

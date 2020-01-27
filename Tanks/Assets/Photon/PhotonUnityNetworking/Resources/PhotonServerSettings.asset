@@ -47,5 +47,6 @@ MonoBehaviour:
   - Init
   - HideObject
   - DeactivateSelf
+  - HandleWin
   DisableAutoOpenWizard: 1
   ShowSettings: 0
