@@ -49,5 +49,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("Start game");
         Player = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "NetworkPlayer"), Vector2.zero, Quaternion.identity).GetComponent<NetworkPlayer>();
+
+        if (PhotonNetwork.IsMasterClient)
+            GameManager.instance.StartGame();
     }
 }

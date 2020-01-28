@@ -29,6 +29,11 @@ public class GameManager : MonoBehaviourPun, IRestart
         SpawnManager.Restart += AfterRestart;
     }
 
+    public void StartGame()
+    {
+        SpawnManager.Init();
+    }
+
     private void AfterRestart()
     {
         EnviromentManager.Restart();

@@ -14,12 +14,19 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] float respawnTime = 3f;
     [SerializeField] Text timeTxt;
     [SerializeField] GameObject respawnPanel;
-
     public event Action Restart;
+
+    private WeaponSpawner weaponSpawner;
 
     private void Awake()
     {
+        weaponSpawner = GetComponent<WeaponSpawner>();
         respawnPanel.SetActive(false);
+    }
+
+    public void Init()
+    {
+        weaponSpawner.Init();
     }
 
     public void RestartRound()
@@ -45,7 +52,7 @@ public class SpawnManager : MonoBehaviour
         respawnPanel.SetActive(false);
         RespawnPlayer();
         Restart?.Invoke();
-    }
+    } 
 
     void RespawnPlayer()
     {
