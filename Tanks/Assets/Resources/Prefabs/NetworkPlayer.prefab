@@ -66,3 +66,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de31280fae7ec544bb22d268d2e87fe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tanksPrefabs:
+  - {fileID: 216322677008517352, guid: c9ecea13053bc804491504899522797d, type: 3}
+  - {fileID: 3031034062744059160, guid: 7c65f485ebd56fa438b87fc0a656a219, type: 3}
