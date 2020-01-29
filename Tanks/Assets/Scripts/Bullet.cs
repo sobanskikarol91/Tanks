@@ -21,7 +21,6 @@ public class Bullet : MonoBehaviourPun, IRestart
 
     private void FixedUpdate()
     {
-        rigidbody.velocity = rigidbody.velocity.normalized * speed;
         SetRotationAccordingToMovement();
     }
 
@@ -45,9 +44,8 @@ public class Bullet : MonoBehaviourPun, IRestart
 
     public void Shot(Vector2 position, Vector2 direction)
     {
-        rigidbody.velocity = direction * speed;
+        rigidbody.velocity = direction.normalized * speed;
         transform.position = position;
-        gameObject.SetActive(true);
     }
 
     public void Restart()

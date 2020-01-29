@@ -36,7 +36,7 @@ public class Shooting : MonoBehaviourPun
     private void Update()
     {
         if (IsGunFarAwayFromWall() && photonView.IsMine && Input.GetMouseButtonDown(0))
-            photonView.RPC(nameof(Fire), RpcTarget.All);
+            photonView.RPC(nameof(Fire), RpcTarget.AllBuffered);
     }
 
     [PunRPC]
@@ -44,10 +44,9 @@ public class Shooting : MonoBehaviourPun
     {
         Bullet bullet = bulletsPool.Dequeue().GetComponent<Bullet>();
         bullet.gameObject.SetActive(true);
-        bullet.transform.position = spawnPoint.position;
+        bullet.Shot(spawnPoint.position, -transform.up);
         // SpawnManager.spawnedObjects.Add(bullet);
         AudioSource.PlayClipAtPoint(shotSnd, transform.position);
-        bullet.Shot(spawnPoint.transform.position, -transform.up);
         bulletsPool.Enqueue(bullet.gameObject);
     }
 
