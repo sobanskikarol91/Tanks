@@ -7,7 +7,7 @@ public abstract class PowerUp : MonoBehaviour
     {
         Tank tank = collision.gameObject.GetComponent<Tank>();
 
-        if (tank && tank.photonView.IsMine)
+        if (PhotonNetwork.IsMasterClient)
         {
             CollectedByPlayer(collision);
             PhotonNetwork.Destroy(gameObject);
