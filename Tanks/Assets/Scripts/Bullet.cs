@@ -22,6 +22,12 @@ public class Bullet : MonoBehaviourPun, IRestart
     private void FixedUpdate()
     {
         SetRotationAccordingToMovement();
+        KeepConstantVelocity();
+    }
+
+    private void KeepConstantVelocity()
+    {
+        rigidbody.velocity = rigidbody.velocity.normalized * speed;
     }
 
     private void SetRotationAccordingToMovement()
