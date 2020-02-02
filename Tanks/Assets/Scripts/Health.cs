@@ -21,13 +21,14 @@ public class Health : MonoBehaviourPun, IPunObservable, IRestart
         currentHealth = maxHealth;
     }
 
+    [PunRPC]
     public void DoDamage(float damage)
     {
         if (IsDeath) return;
 
-        //Debug.Log($"Damage: {damage}");
+        Debug.Log($"Damage: {damage}");
         currentHealth -= damage;
-        photonView.RPC(nameof(OnHealthChange), RpcTarget.AllViaServer, currentHealth, maxHealth, damage);
+        OnHealthChange(currentHealth, maxHealth, damage);
         AudioSource.PlayClipAtPoint(damageSnd, transform.position);
         currentHealth--;
 
@@ -35,7 +36,6 @@ public class Health : MonoBehaviourPun, IPunObservable, IRestart
             photonView.RPC(nameof(OnDie), RpcTarget.All);
     }
 
-    [PunRPC]
     private void OnHealthChange(float currentHealth, float maxHealth, float damage)
     {
         HealthChange?.Invoke(currentHealth, maxHealth);

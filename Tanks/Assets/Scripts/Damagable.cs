@@ -19,13 +19,16 @@ public class Damagable : MonoBehaviourPun
 
     private void DoDamage(Collision2D collision)
     {
-        Health health = collision.gameObject.GetComponent<Health>();
-
-        if (health)
-            health.DoDamage(damage);
-
         if (photonView.IsMine)
+        {
+            Health health = collision.gameObject.GetComponent<Health>();
+
+            if (health)
+                health.photonView.RPC(nameof(health.DoDamage), RpcTarget.AllBuffered, damage);
+
             photonView.RPC(nameof(HideObject), RpcTarget.All);
+        }
+
     }
 
     [PunRPC]
