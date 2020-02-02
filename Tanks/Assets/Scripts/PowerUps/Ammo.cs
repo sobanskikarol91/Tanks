@@ -7,6 +7,6 @@ public class Ammo : PowerUp
         Shooting shooting = collision.gameObject.GetComponent<Shooting>();
 
         if (shooting)
-            shooting.IncreaseBullets();
+            shooting.photonView.RPC(nameof(shooting.IncreaseBullets), Photon.Pun.RpcTarget.All);
     }
 }

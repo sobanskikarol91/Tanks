@@ -48,5 +48,7 @@ MonoBehaviour:
   - HideObject
   - DeactivateSelf
   - HandleWin
+  - IncreaseBullets
+  - PrepareCurrentPool
   DisableAutoOpenWizard: 1
   ShowSettings: 0
